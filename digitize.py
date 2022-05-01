@@ -42,7 +42,7 @@ def get_chars_from_word_comps(cv2_word_img, english=True):
   canny_ratio = 4
   canny_threshold = 50
   upper_canny_threshold = canny_threshold*canny_ratio
-  img_canny = cv2.Canny(connected, canny_threshold, upper_canny_threshold)
+  img_canny = cv2.Canny(cv2_word_img, canny_threshold, upper_canny_threshold)
   
   cntrs, hierarchy = cv2.findContours(img_canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
   cntrs, median_h = remove_non_words_or_chars(cntrs, .4)
@@ -218,6 +218,10 @@ def show_bounds_rects_by_word(bound_rects_by_line,img_blur):
   plt.figure(figsize=(15,15))
   plt.imshow(bound_box_img)
 
+##################
+## new section
+##################
+
 def predict_char(model, idx_to_letter, img,  show_img=False):  
 
   img = tf.expand_dims(img, axis=0) # add 1
@@ -237,9 +241,8 @@ def digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw):
     page_output = []
     i = 0
     for line in bound_rects_by_line:
-        if i > 10:
-            break
-
+        # if i > 10:
+        #     break
         predicted_line  = []
 
         for bound_rect_words in line:
@@ -250,7 +253,6 @@ def digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw):
                                                             img_blur_bw, 
                                                             img_blur_bw, 
                                                             english=False, 
-                                                            # show_bound_rects_chars=False
                                                             show_bound_rects_chars=False
                                                             )
             # plt.show()
@@ -289,12 +291,8 @@ def main():
 
     page_output = digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw)
 
-
-
-
-
-
-
-
 if __name__=="__main__":
     main()
+
+
+    

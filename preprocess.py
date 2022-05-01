@@ -55,4 +55,4 @@ def load_glyphs(path):
   return labels, imgs
 
 if __name__=="__main__":
-    main()
+    pass

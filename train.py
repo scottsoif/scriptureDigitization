@@ -125,8 +125,9 @@ def train(data_file_dir):
 
 def main():
 
-    history = train(data_file_dir="data/heb_dataset/")
-    plot(history, save=True)
+    # history = train(data_file_dir="data/heb_dataset/")
+    # plot(history, save=True)
+    pass
 
 
 if __name__=="__main__":

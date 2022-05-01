@@ -1,4 +1,3 @@
-
 from PIL import Image, ImageFont, ImageDraw
 from fontTools.ttLib import TTFont
 
