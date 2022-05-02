@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ```
 
 >>> python digitize.py --help
-usage: bayes_network.py [-h] [--i FILEPATH] [--s3 S3_BUCKET] [--chisquare_hm] [--pearson_hm] [--graph] [--compare_cols] [--select_cols]
+usage: digitize.py [-h] --i FILEPATH
 
 optional arguments:
   -h, --help      show this help message and exit
