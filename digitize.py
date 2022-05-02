@@ -13,6 +13,8 @@ import imutils
 import numpy as np
 import pathlib
 import os
+import argparse
+
 
 idx_to_letter = {(i-ord("א")):chr(i) for i in range(ord('א'), ord("ת")+1)}
 
@@ -237,12 +239,14 @@ def predict_char(model, idx_to_letter, img,  show_img=False):
 
   return char_letter
 
-def digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw):
+def get_page_out(model, bound_rects_by_line, img_blur_bw, img_src_bw):
     page_output = []
     i = 0
-    for line in bound_rects_by_line:
+    print("Processing line status:")
+    for line_i, line in enumerate(bound_rects_by_line):
         # if i > 10:
         #     break
+        print(f"{line_i+1}/{len(bound_rects_by_line)}")
         predicted_line  = []
 
         for bound_rect_words in line:
@@ -266,18 +270,16 @@ def digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw):
 
             pred_word = "".join(pred_word)
             predicted_line.append(pred_word)
-            print(pred_word)
+            # print(pred_word)
 
-    predicted_line = " ".join(predicted_line)
-    page_output.append(predicted_line)
+        predicted_line = " ".join(predicted_line)
+        page_output.append(predicted_line)
     
     return page_output
 
-
-
-def main():
-    # img_path = "ancient_img1.jpeg"
-    img_path = "data/ancient_img2.png"
+def digitize_page(img_path):
+        
+    # img_path = "data/ancient_img2.png"
 
 
     img_blur = preprocess_img_cv2(img_path) # for lines and words
@@ -289,7 +291,17 @@ def main():
     # show_bounds_rects_by_word(bound_rects_by_line, img_blur)
     model = keras.models.load_model("outputs/ocr_model_hebrew.h5")
 
-    page_output = digitize_page(model, bound_rects_by_line, img_blur_bw, img_src_bw)
+    page_output = get_page_out(model, bound_rects_by_line, img_blur_bw, img_src_bw)
+    for line in page_output:
+        print(line)
+
+def main():
+    parser = argparse.ArgumentParser()
+    required_args = parser.add_argument_group('required arguments')
+    required_args.add_argument('--i', required=True, dest="filepath", help="input filepath of image to digitize")
+
+    args = parser.parse_args()
+    digitize_page(args.filepath)
 
 if __name__=="__main__":
     main()
