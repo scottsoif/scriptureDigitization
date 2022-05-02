@@ -1,3 +1,14 @@
+# python3
+# -*- coding: utf-8 -*-
+#
+# ===============================================
+# Author: Scott A. Soifer
+# Email: sas2412@columbia.edu
+# Email: soifer00@gmail.com
+# Date Created: Sun May 1 6:26:34 EST 2022
+# ======================================================
+
+
 import tensorflow as tf
 from tensorflow import keras
 
