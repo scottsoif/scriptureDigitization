@@ -39,7 +39,7 @@ def get_words_by_line(cv2_img, english=True):
 def get_chars_from_word_comps(cv2_word_img, english=True):
 
   kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1,4))
-  connected = cv2.dilate(cv2_word_img, kernel, iterations=3)
+  connected = cv2.dilate(cv2_word_img, kernel, iterations=2)
  
   canny_ratio = 4
   canny_threshold = 50
