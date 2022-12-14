@@ -1,3 +1,4 @@
+## [Keynote Link](https://docs.google.com/presentation/d/1jeNSV4cYchvPff2LaKfkTOXqbJqQEiQVQjb-esuDaco/edit?usp=sharing)
 # scriptureDigitization
 
 # Getting Started
